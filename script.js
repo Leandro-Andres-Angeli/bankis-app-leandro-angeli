@@ -36,7 +36,7 @@ const functionalitiesList = () => {
 };
 
 console.log(
-	`%c WELCOME TO BANKIST APP \n This is an activity from Jonas Schmedtmann's Javascript Course \n I followed the course's guidelines but used my own approach , changed the code to make it as concise and DRY as possible I used method chaining and logical operator chaining , ternary operators and destructuring  \n App functionalities :${functionalitiesList()} `,
+	`%c WELCOME TO BANKIST APP \n This is an activity from Jonas Schmedtmann's Javascript Course \n I followed the course's guidelines but used my own approach , changed the code to make it as concise and DRY as possible I used method chaining and logical operator chaining , ternary operators and destructuring \n Currently is not responsive  \n App functionalities :${functionalitiesList()} `,
 	'background:blue ; color :white'
 );
 // Data
