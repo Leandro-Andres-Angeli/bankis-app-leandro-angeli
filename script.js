@@ -3,7 +3,39 @@
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
+const displayList = (list) => {
+	let joinedString = '';
+	for (const item of list) {
+		joinedString = [
+			...joinedString,
+			'✨',
+			item[0].toUpperCase() + item.slice(1) + '\n',
+		];
+	}
+	return joinedString.join().replaceAll(',', '').trim();
+};
+const functionalitiesList = () => {
+	const functionalities = [
+		'login',
 
+		'get loan form bank',
+		'transfer to another account',
+		'for every action you must introduce',
+		'close account',
+		'log out after 5 minutes of inactivity',
+		'sort movements in ascending or descending order',
+		'currency internationalization according to users location account',
+		'date internationalization according to users location account',
+		"project 100% front end using vanilla JS , so changes doesn't persist in any DB , everything will be back to default after refresh",
+		"validation for  movements (e.g: user can only have a loan if its amount is  equal or higher than at least one deposit in his/her account , user can only transfer to existing accounts and only transfer and amount equal or lower that his/her current balance, user can't transfer money to himself/herself)",
+	];
+	return displayList(functionalities);
+};
+
+console.log(
+	`%c WELCOME TO BANKIST APP \n This is an activity from Jonas Schmedtmann's Javascript Course \n I followed the guidilines of the course but used my own approach , changed the code to make it as concise and DRY as possible I used method chaining and logical operator chaining , ternary operators and destructuring  \n App functionalities :${functionalitiesList()} `,
+	'background:blue ; color :white'
+);
 // Data
 // DIFFERENT DATA! Contains movement dates, currency and locale
 
@@ -81,6 +113,22 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
+const validAccounts = () => {
+	let accounstStr = [];
+	for (const account of accounts) {
+		const [name, lastName] = account.owner.split(' ');
+		const accs = `🙍‍♂️ user id: ${
+			name[0].toLowerCase() + lastName[0].toLowerCase()
+		} pin : ${account.pin} \n `;
+		accounstStr = [...accounstStr, accs];
+	}
+	return accounstStr.join().replaceAll(',', '').trim();
+};
+
+console.log(
+	`%cThese are the valid accounts that you can use to log in \n ${validAccounts()}`,
+	'background:yellow'
+);
 
 // Elements
 const labelWelcome = document.querySelector('.welcome');
@@ -152,37 +200,52 @@ const calcDaysPassed = (date1, date2) => {
 };
 
 const displayMovements = function (acc, sort = false) {
-	const m = acc.movements.slice();
+	const movsAndDate = () => {
+		let movsAndDates = [];
+		const { movementsDates, movements } = acc;
+		for (const [index, val] of Object.entries(movements)) {
+			movsAndDates = [
+				...movsAndDates,
+				{
+					movements: val,
+					movementsDates: new Date(movementsDates[`${index}`]),
+				},
+			];
+		}
+		return movsAndDates;
+	};
+	// const m = acc.movements.slice();
+	const m = movsAndDate().slice();
 
 	let movs =
 		sort === false
-			? m.slice().sort((a, b) => a - b)
-			: m.slice().sort((a, b) => b - a);
+			? m.slice().sort((a, b) => a.movements - b.movements)
+			: m.slice().sort((a, b) => b.movements - a.movements);
 
 	containerMovements.innerHTML = '';
-	movs.forEach((mov, i) => {
-		const type = mov > 0 ? 'deposit' : 'withdrawal';
-		const movDate = new Date(acc.movementsDates[i]);
-		const daysPassed = calcDaysPassed(new Date(), movDate);
+	for (const mov of Object.values(movs)) {
+		const type = mov.movements > 0 ? 'deposit' : 'withdrawal';
+
+		const daysPassed = calcDaysPassed(new Date(), mov.movementsDates);
 
 		const html = ` <div class="movements__row">
 			<div class="movements__type movements__type--${type}"> ${type}</div>
-			 <div class="movements__date">${formatMovementDate(
-					movDate,
-					currentAccount.locale
-				)} ${(daysPassed > 1 && daysPassed) || ''} ${
+					<div class="movements__date">${formatMovementDate(
+						mov.movementsDates,
+						currentAccount.locale
+					)} ${(daysPassed > 1 && daysPassed) || ''} ${
 			daysPassed === 0 ? 'today' : daysPassed === 1 ? 'yesterday' : ' days ago'
 		} </div>
 			<div class="movements__value">${formatAmount(
-				mov,
+				mov.movements,
 				acc.locale,
 				acc.currency
 			)} </div>
 		</div>`;
-		return containerMovements.insertAdjacentHTML('afterbegin', html);
-	});
+		containerMovements.insertAdjacentHTML('afterbegin', html);
+	}
 };
-// displayMovements(account1.movements);
+
 ////////////////////////////
 const currencies = new Map([
 	['USD', 'United States dollar'],
@@ -431,7 +494,7 @@ btnLoan.addEventListener('click', (e) => {
 		)}`
 	)
 		? setTimeout(() => {
-				console.log('requesting loan');
+				// console.log('requesting loan');
 				clearInterval(timer);
 				timer = startLogOutTimer();
 				return updateUi(currentAccount) && alert('loan requested successfully');
