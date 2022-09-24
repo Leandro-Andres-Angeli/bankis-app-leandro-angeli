@@ -21,7 +21,7 @@ const functionalitiesList = () => {
 	const functionalities = [
 		'login',
 
-		'get loan form bank',
+		'get loan from bank',
 		'transfer to another account',
 		'for every action you must introduce id and pin (e.g: if you want to transfer to another user you must introduce his/her  id)',
 		'close account',
