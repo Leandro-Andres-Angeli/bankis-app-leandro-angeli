@@ -2,6 +2,9 @@
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
+alert(
+	'HELLO WELCOME  TO BANKIST !! APP CHECK THE CONSOLE TO SEE INSTRUCTIONS ABOUT LOG IN AND APP FUNCTIONALITIES'
+);
 // BANKIST APP
 const displayList = (list) => {
 	let joinedString = '';
@@ -20,14 +23,14 @@ const functionalitiesList = () => {
 
 		'get loan form bank',
 		'transfer to another account',
-		'for every action you must introduce',
+		'for every action you must introduce id and pin (e.g: if you want to transfer to another user you must introduce his/her  id)',
 		'close account',
 		'log out after 5 minutes of inactivity',
 		'sort movements in ascending or descending order',
 		'currency internationalization according to users location account',
 		'date internationalization according to users location account',
 		"project 100% front end using vanilla JS , so changes doesn't persist in any DB , everything will be back to default after refresh",
-		"validation for  movements (e.g: user can only have a loan if its amount is  equal or higher than at least one deposit in his/her account , user can only transfer to existing accounts and only transfer and amount equal or lower that his/her current balance, user can't transfer money to himself/herself)",
+		"validation for  movements (e.g: user can only have a loan if its amount is  equal or higher than 10% of at least one deposit in his/her account , user can only transfer to existing accounts and only transfer and amount equal or lower that his/her current balance, user can't transfer money to himself/herself)",
 	];
 	return displayList(functionalities);
 };
