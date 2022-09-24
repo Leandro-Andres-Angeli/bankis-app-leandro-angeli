@@ -14,7 +14,7 @@ WELCOME TO BANKIST APP
 ✨Currency internationalization according to users location account
 ✨Date internationalization according to users location account
 ✨Project 100% front end using vanilla JS  so changes doesn't persist in any DB  everything will be back to default after refresh
-✨Validation for  movements (e.g: user can only have a loan if its amount is  equal or higher than 10% of at least one deposit in his/her account  user can only transfer to existing accounts and only transfer and amount equal or lower that his/her current balance user can't transfer money to himself/herself) script.js:38:9
+✨Validation for  movements (e.g: user can only have a loan if its amount is  equal or higher than 10% of at least one deposit in his/her account  user can only transfer to existing accounts and only transfer and amount equal or lower that his/her current balance user can't transfer money to himself/herself) 
 These are the valid accounts that you can use to log in 
 ❌Currently not responsive
  🙍‍♂️ user id: js pin : 1111 
