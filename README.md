@@ -21,3 +21,4 @@ These are the valid accounts that you can use to log in
  🙍‍♂️ user id: jd pin : 2222 
  🙍‍♂️ user id: st pin : 3333 
  🙍‍♂️ user id: ss pin : 4444
+Deployed @ https://angeli-bankist-app.netlify.app/
